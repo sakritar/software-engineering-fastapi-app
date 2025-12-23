@@ -9,7 +9,7 @@ services:
     volumes:
       - todo-data:/app/data
     environment:
-      - DATABASE_URL=sqlite:///./data/todo.db
+      - DATABASE_URL=sqlite:////app/data/todo.db
     networks:
       - app-network
 
@@ -23,7 +23,7 @@ services:
     volumes:
       - shorturl-data:/app/data
     environment:
-      - DATABASE_URL=sqlite:///./data/shorturl.db
+      - DATABASE_URL=sqlite:////app/data/shorturl.db
     networks:
       - app-network
 

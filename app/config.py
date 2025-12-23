@@ -1,2 +1,0 @@
-SQLALCHEMY_DATABASE_URI = 'sqlite:////app/db.sqlite3'
-SQLALCHEMY_TRACK_MODIFICATIONS = False

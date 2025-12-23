@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker, Session
 
 from app.models import AbstractModel
 
-database_url = os.getenv('DATABASE_URL', 'sqlite:///./data/shorturl.db')
+database_url = os.getenv('DATABASE_URL', 'sqlite:////app/data/shorturl.db')
 
 engine = create_engine(
     database_url,
@@ -31,7 +31,7 @@ def get_db() -> Generator[Session, None, None]:
 def create_app() -> FastAPI:
     @asynccontextmanager
     async def lifespan(_app: FastAPI):
-        AbstractModel.metadata.create_all(bind=engine)
+        # Миграции выполняются через Alembic в entrypoint.sh
         yield
         engine.dispose()
 
