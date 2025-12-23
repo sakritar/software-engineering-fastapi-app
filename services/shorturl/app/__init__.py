@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker, Session
 
 from app.models import AbstractModel
 
-database_url = os.getenv('DATABASE_URL', 'sqlite:///./data/todo.db')
+database_url = os.getenv('DATABASE_URL', 'sqlite:///./data/shorturl.db')
 
 engine = create_engine(
     database_url,
