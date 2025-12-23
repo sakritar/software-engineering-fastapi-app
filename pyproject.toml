@@ -1,7 +1,7 @@
 [project]
-name = "fastapi-service"
+name = "microservices-app"
 version = "0.1.0"
-description = ""
+description = "ToDo and Short URL microservices"
 authors = [
     {name = "Your Name",email = "you@example.com"}
 ]
@@ -11,9 +11,7 @@ dependencies = [
     "fastapi (>=0.115.0,<1.0.0)",
     "uvicorn[standard] (>=0.32.0,<1.0.0)",
     "sqlalchemy (>=2.0.43,<3.0.0)",
-    "psycopg2-binary (>=2.9.9,<3.0.0)",
-    "alembic (>=1.16.4,<2.0.0)",
-    "pydantic (>=2.10.1,<3.0.0)",
+    "pydantic[email] (>=2.10.1,<3.0.0)",
     "pytest (>=8.4.1,<9.0.0)",
     "pytest-asyncio (>=0.24.0,<1.0.0)",
     "httpx (>=0.27.0,<1.0.0)",

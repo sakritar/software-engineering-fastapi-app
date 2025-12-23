@@ -1,21 +1,37 @@
 services:
-
-  app:
+  todo-service:
     build:
       context: .
-      dockerfile: Dockerfile
-    command: "sh ./entrypoint.sh"
-    container_name: app
+      dockerfile: services/todo/Dockerfile
+    container_name: todo-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - todo-data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:///./data/todo.db
     networks:
       - app-network
-    ports:
-      - "${APP_PORT}:8000"
-    volumes:
-      - .:/app/
 
-#volumes:
-#  db_volume:
-#    driver: local
+  shorturl-service:
+    build:
+      context: .
+      dockerfile: services/shorturl/Dockerfile
+    container_name: shorturl-service
+    ports:
+      - "8001:8001"
+    volumes:
+      - shorturl-data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:///./data/shorturl.db
+    networks:
+      - app-network
+
+volumes:
+  todo-data:
+    driver: local
+  shorturl-data:
+    driver: local
 
 networks:
   app-network:
