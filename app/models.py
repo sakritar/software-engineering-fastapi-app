@@ -1,8 +1,7 @@
 from datetime import datetime, timezone
 
+from sqlalchemy import Column, Integer, String, Text, DateTime
 from sqlalchemy.orm import DeclarativeBase
-
-from app import db
 
 
 class AbstractModel(DeclarativeBase):
@@ -12,8 +11,8 @@ class AbstractModel(DeclarativeBase):
 class Post(AbstractModel):
     __tablename__ = 'posts'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
-    updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(200), nullable=False)
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)

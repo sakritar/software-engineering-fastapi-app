@@ -1,100 +1,131 @@
-from flask import Blueprint, request, jsonify
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
-from app import db
+from sqlalchemy.orm import Session
+from typing import List
+
+from app import get_db
 from app.models import Post
 from app.schemas import PostCreate, PostUpdate, PostResponse
-from pydantic import ValidationError
 
-posts_bp = Blueprint('posts', __name__, url_prefix='/api/posts')
+router = APIRouter()
 
 
-@posts_bp.route('', methods=['GET'])
-def get_posts():
+@router.get('', response_model=List[PostResponse], status_code=status.HTTP_200_OK)
+def get_posts(db: Session = Depends(get_db)):
     try:
-        posts = db.session.query(Post).all()
-        return jsonify([PostResponse.model_validate(post).model_dump() for post in posts]), 200
+        posts = db.query(Post).all()
+        return posts
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
 
 
-@posts_bp.route('/<int:post_id>', methods=['GET'])
-def get_post(post_id):
+@router.get('/{post_id}', response_model=PostResponse, status_code=status.HTTP_200_OK)
+def get_post(post_id: int, db: Session = Depends(get_db)):
     try:
-        post = db.session.get(Post, post_id)
+        post = db.get(Post, post_id)
         if post is None:
-            return jsonify({'error': 'Post not found'}), 404
-        return jsonify(PostResponse.model_validate(post).model_dump()), 200
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Post not found'
+            )
+        return post
+    except HTTPException:
+        raise
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
 
 
-@posts_bp.route('', methods=['POST'])
-def create_post():
+@router.post('', response_model=PostResponse, status_code=status.HTTP_201_CREATED)
+def create_post(post_data: PostCreate, db: Session = Depends(get_db)):
     try:
-        data = request.get_json()
-        post_data = PostCreate.model_validate(data)
-        
         post = Post(
             title=post_data.title,
             content=post_data.content
         )
-        db.session.add(post)
-        db.session.commit()
-        
-        return jsonify(PostResponse.model_validate(post).model_dump()), 201
-    except ValidationError as e:
-        return jsonify({'error': e.errors()}), 400
+        db.add(post)
+        db.commit()
+        db.refresh(post)
+        return post
     except SQLAlchemyError as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
     except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
 
 
-@posts_bp.route('/<int:post_id>', methods=['PUT'])
-def update_post(post_id):
+@router.put('/{post_id}', response_model=PostResponse, status_code=status.HTTP_200_OK)
+def update_post(post_id: int, post_data: PostUpdate, db: Session = Depends(get_db)):
     try:
-        post = db.session.get(Post, post_id)
+        post = db.get(Post, post_id)
         if post is None:
-            return jsonify({'error': 'Post not found'}), 404
-        
-        data = request.get_json()
-        post_data = PostUpdate.model_validate(data)
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Post not found'
+            )
         
         if post_data.title is not None:
             post.title = post_data.title
         if post_data.content is not None:
             post.content = post_data.content
         
-        db.session.commit()
-        
-        return jsonify(PostResponse.model_validate(post).model_dump()), 200
-    except ValidationError as e:
-        return jsonify({'error': e.errors()}), 400
+        db.commit()
+        db.refresh(post)
+        return post
+    except HTTPException:
+        raise
     except SQLAlchemyError as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
     except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
 
 
-@posts_bp.route('/<int:post_id>', methods=['DELETE'])
-def delete_post(post_id):
+@router.delete('/{post_id}', status_code=status.HTTP_200_OK)
+def delete_post(post_id: int, db: Session = Depends(get_db)):
     try:
-        post = db.session.get(Post, post_id)
+        post = db.get(Post, post_id)
         if post is None:
-            return jsonify({'error': 'Post not found'}), 404
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Post not found'
+            )
         
-        db.session.delete(post)
-        db.session.commit()
+        db.delete(post)
+        db.commit()
         
-        return jsonify({'message': 'Post deleted successfully'}), 200
+        return {'message': 'Post deleted successfully'}
+    except HTTPException:
+        raise
     except SQLAlchemyError as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
     except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
 
