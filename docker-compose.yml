@@ -4,14 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: "sh /entrypoint.sh"
+    command: "sh ./entrypoint.sh"
     container_name: app
     networks:
       - app-network
     ports:
       - "${APP_PORT}:8000"
     volumes:
-      - ./app/:/app/
+      - .:/app/
 
 #volumes:
 #  db_volume:

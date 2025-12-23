@@ -1,4 +1,4 @@
 data/
 .idea/
 .vscode/
-.env
+*.sqlite3

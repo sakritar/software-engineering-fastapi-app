@@ -4,9 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from src.config import settings
-from src.models import AbstractModel # noqa
-from src.users.models import *
+from app.models import AbstractModel, Post  # noqa
 
 config = context.config
 
@@ -15,16 +13,14 @@ if config.config_file_name is not None:
 
 target_metadata = AbstractModel.metadata
 
-config.set_main_option('sqlalchemy.url', settings.database_url_psycopg)
-
 
 def run_migrations_offline() -> None:
-    url = config.get_main_option("sqlalchemy.url")
+    url = config.get_main_option('sqlalchemy.url')
     context.configure(
         url=url,
         target_metadata=target_metadata,
         literal_binds=True,
-        dialect_opts={"paramstyle": "named"},
+        dialect_opts={'paramstyle': 'named'},
     )
 
     with context.begin_transaction():
@@ -34,7 +30,7 @@ def run_migrations_offline() -> None:
 def run_migrations_online() -> None:
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
+        prefix='sqlalchemy.',
         poolclass=pool.NullPool,
     )
 

@@ -18,4 +18,4 @@ RUN poetry install --no-root --no-interaction --no-ansi
 
 COPY . /app/
 
-RUN chmod +x entrypoint.sh
+RUN chmod +x ./entrypoint.sh
