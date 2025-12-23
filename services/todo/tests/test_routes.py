@@ -19,7 +19,6 @@ def client(app):
 
 @pytest.fixture
 def mock_todo_item():
-    """Создает реальный объект TodoItem для тестов"""
     item = TodoItem(
         id=1,
         title='Test Task',
@@ -33,7 +32,6 @@ def mock_todo_item():
 
 @pytest.fixture
 def mock_db_session():
-    """Создает моковую сессию БД"""
     return MagicMock()
 
 
@@ -121,7 +119,6 @@ def test_create_item(client, mock_db_session):
 
 
 def test_create_item_minimal(client, mock_db_session):
-    """Тест создания задачи только с title"""
     data = {
         'title': 'Minimal Task'
     }
@@ -186,7 +183,6 @@ def test_update_item(client, mock_todo_item, mock_db_session):
 
 
 def test_update_item_partial_title(client, mock_todo_item, mock_db_session):
-    """Тест частичного обновления - только title"""
     data = {
         'title': 'Updated Title Only'
     }
@@ -204,7 +200,6 @@ def test_update_item_partial_title(client, mock_todo_item, mock_db_session):
 
 
 def test_update_item_partial_completed(client, mock_todo_item, mock_db_session):
-    """Тест частичного обновления - только completed"""
     data = {
         'completed': True
     }

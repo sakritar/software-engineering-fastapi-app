@@ -19,7 +19,6 @@ def client(app):
 
 @pytest.fixture
 def mock_short_url():
-    """Создает реальный объект ShortUrl для тестов"""
     short_url = ShortUrl(
         id=1,
         short_id='abc12345',
@@ -31,12 +30,10 @@ def mock_short_url():
 
 @pytest.fixture
 def mock_db_session():
-    """Создает моковую сессию БД"""
     return MagicMock()
 
 
 def test_shorten_url(client, mock_db_session):
-    """Тест создания короткой ссылки"""
     data = {
         'url': 'https://example.com/very/long/url/path'
     }
@@ -47,15 +44,12 @@ def test_shorten_url(client, mock_db_session):
         created_at=datetime.now(timezone.utc)
     )
     
-    # Мокируем query для проверки существования
     mock_query = MagicMock()
     mock_query.filter.return_value.first.return_value = None  # short_id не существует
     mock_db_session.query.return_value = mock_query
     
-    # Мокируем создание ShortUrl объекта
     with patch('app.routes.ShortUrl') as mock_short_url_class:
         mock_short_url_class.return_value = mock_short_url
-        # Мокируем generate_short_id
         with patch('app.routes.generate_short_id', return_value='abc12345'):
             client.app.dependency_overrides[get_db] = lambda: mock_db_session
             try:
@@ -70,7 +64,6 @@ def test_shorten_url(client, mock_db_session):
 
 
 def test_shorten_url_validation_error_invalid_url(client):
-    """Тест валидации - невалидный URL"""
     data = {
         'url': 'not-a-valid-url'
     }
@@ -80,7 +73,6 @@ def test_shorten_url_validation_error_invalid_url(client):
 
 
 def test_shorten_url_validation_error_missing_url(client):
-    """Тест валидации - отсутствует URL"""
     data = {}
     response = client.post('/shorten', json=data)
     assert response.status_code == 422
@@ -88,7 +80,6 @@ def test_shorten_url_validation_error_missing_url(client):
 
 
 def test_redirect_url(client, mock_short_url, mock_db_session):
-    """Тест перенаправления по короткой ссылке"""
     mock_query = MagicMock()
     mock_query.filter.return_value.first.return_value = mock_short_url
     mock_db_session.query.return_value = mock_query
@@ -103,7 +94,6 @@ def test_redirect_url(client, mock_short_url, mock_db_session):
 
 
 def test_redirect_url_not_found(client, mock_db_session):
-    """Тест перенаправления - короткая ссылка не найдена"""
     mock_query = MagicMock()
     mock_query.filter.return_value.first.return_value = None
     mock_db_session.query.return_value = mock_query
@@ -118,7 +108,6 @@ def test_redirect_url_not_found(client, mock_db_session):
 
 
 def test_get_stats(client, mock_short_url, mock_db_session):
-    """Тест получения статистики по короткой ссылке"""
     mock_query = MagicMock()
     mock_query.filter.return_value.first.return_value = mock_short_url
     mock_db_session.query.return_value = mock_query
@@ -135,7 +124,6 @@ def test_get_stats(client, mock_short_url, mock_db_session):
 
 
 def test_get_stats_not_found(client, mock_db_session):
-    """Тест получения статистики - короткая ссылка не найдена"""
     mock_query = MagicMock()
     mock_query.filter.return_value.first.return_value = None
     mock_db_session.query.return_value = mock_query
@@ -150,12 +138,10 @@ def test_get_stats_not_found(client, mock_db_session):
 
 
 def test_shorten_url_duplicate_short_id(client, mock_db_session):
-    """Тест обработки дубликата short_id (должен генерировать новый)"""
     data = {
         'url': 'https://example.com/another/url'
     }
     
-    # Первая попытка - short_id уже существует
     existing_short_url = ShortUrl(
         id=1,
         short_id='abc12345',
@@ -163,7 +149,6 @@ def test_shorten_url_duplicate_short_id(client, mock_db_session):
         created_at=datetime.now(timezone.utc)
     )
     
-    # Вторая попытка - short_id свободен
     new_short_url = ShortUrl(
         id=2,
         short_id='xyz98765',
@@ -172,13 +157,11 @@ def test_shorten_url_duplicate_short_id(client, mock_db_session):
     )
     
     mock_query = MagicMock()
-    # Первый вызов возвращает существующий, второй - None
     mock_query.filter.return_value.first.side_effect = [existing_short_url, None]
     mock_db_session.query.return_value = mock_query
     
     with patch('app.routes.ShortUrl') as mock_short_url_class:
         mock_short_url_class.return_value = new_short_url
-        # Мокируем generate_short_id чтобы вернуть два разных ID
         with patch('app.routes.generate_short_id', side_effect=['abc12345', 'xyz98765']):
             client.app.dependency_overrides[get_db] = lambda: mock_db_session
             try:
@@ -193,7 +176,6 @@ def test_shorten_url_duplicate_short_id(client, mock_db_session):
 
 
 def test_redirect_url_different_short_ids(client, mock_db_session):
-    """Тест перенаправления для разных short_id"""
     short_url_1 = ShortUrl(
         id=1,
         short_id='id1',
