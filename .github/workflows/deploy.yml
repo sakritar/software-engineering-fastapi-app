@@ -52,8 +52,5 @@ jobs:
 
     - name: Run tests for ${{ matrix.service }} service
       working-directory: services/${{ matrix.service }}
-      env:
-        DATABASE_URL: sqlite:///./data/${{ matrix.service }}.db
-        PYTHONPATH: ${{ github.workspace }}/services/${{ matrix.service }}
       run: poetry run pytest tests/ -v --tb=short
 
