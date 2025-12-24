@@ -11,8 +11,8 @@ make push-todo-service
 ```
 
 # Ссылки на dockerhub
-- https://hub.docker.com/repository/docker/leskovmwork/shorturl-service/general
-- https://hub.docker.com/repository/docker/leskovmwork/todo-service/general
+- https://hub.docker.com/r/leskovmwork/shorturl-service
+- https://hub.docker.com/r/leskovmwork/todo-service
 
 
 ## Настройка локального окружения python
