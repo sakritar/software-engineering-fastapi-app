@@ -1,0 +1,715 @@
+{
+	"info": {
+		"_postman_id": "f96eba40-cdb4-47c8-872d-30e29f78e25d",
+		"name": "se-fastapi-homework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29742094"
+	},
+	"item": [
+		{
+			"name": "todo",
+			"item": [
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "5525404183532287750719605348363660735257240258673167893605695695452227165628235872040173810821283105",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://batyukovstudio.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/todo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"todo"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "5525404183532287750719605348363660735257240258673167893605695695452227165628235872040173810821283105",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://batyukovstudio.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/todo/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"todo",
+								"3"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "5525404183532287750719605348363660735257240258673167893605695695452227165628235872040173810821283105",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://batyukovstudio.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/todo/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"todo",
+								"5"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"1666666623\",\r\n    \"description\": \"56667\",\r\n    \"completed\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/todo/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"todo",
+								"1"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"123\",\r\n    \"description\": \"567\",\r\n    \"completed\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/todo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"todo"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "url-service",
+			"item": [
+				{
+					"name": "redirect",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "5525404183532287750719605348363660735257240258673167893605695695452227165628235872040173810821283105",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://batyukovstudio.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8001/LYyKZ3e9",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"LYyKZ3e9"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stats",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Acceptp",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "5525404183532287750719605348363660735257240258673167893605695695452227165628235872040173810821283105",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://batyukovstudio.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8001/stats/LYyKZ3e9",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"stats",
+								"LYyKZ3e9"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shorten",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer aboba",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"url\": \"https://google.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8001/shorten",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8001",
+							"path": [
+								"shorten"
+							],
+							"query": [
+								{
+									"key": "code_challenge",
+									"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+									"disabled": true
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256",
+									"disabled": true
+								},
+								{
+									"key": "code_verifier",
+									"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer aboba",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"234\",\r\n    \"content\": \"st555hs\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9123/api/posts/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9123",
+					"path": [
+						"api",
+						"posts",
+						"3"
+					],
+					"query": [
+						{
+							"key": "code_challenge",
+							"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+							"disabled": true
+						},
+						{
+							"key": "code_challenge_method",
+							"value": "S256",
+							"disabled": true
+						},
+						{
+							"key": "code_verifier",
+							"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "test",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer aboba",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"234\",\r\n    \"content\": \"st555hs\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9123/api/posts/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9123",
+					"path": [
+						"api",
+						"posts",
+						"3"
+					],
+					"query": [
+						{
+							"key": "code_challenge",
+							"value": "ffbfMz-cIQgPWhQqLOStSqZTPtnTe9x9EQIFfpmUip4",
+							"disabled": true
+						},
+						{
+							"key": "code_challenge_method",
+							"value": "S256",
+							"disabled": true
+						},
+						{
+							"key": "code_verifier",
+							"value": "7483494446561578856861822034237146110206979160510494584960463181374395422682398940255989884843353073",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
