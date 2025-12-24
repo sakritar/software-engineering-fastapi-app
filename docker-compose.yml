@@ -5,7 +5,7 @@ services:
       dockerfile: services/todo/Dockerfile
     container_name: todo-service
     ports:
-      - "8000:8000"
+      - "${TODO_SERVICE_PORT}:8000"
     volumes:
       - todo-data:/app/data
     environment:
@@ -19,7 +19,7 @@ services:
       dockerfile: services/shorturl/Dockerfile
     container_name: shorturl-service
     ports:
-      - "8001:8001"
+      - "${URL_SERVICE_PORT}:8001"
     volumes:
       - shorturl-data:/app/data
     environment:
