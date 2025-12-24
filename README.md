@@ -4,6 +4,17 @@ make up  # поднять проект
 make rebuild  # пересобрать контейнеры
 ```
 
+# Пуш образа Docker
+```bash
+make push-shorturl-service
+make push-todo-service
+```
+
+# Ссылки на dockerhub
+- https://hub.docker.com/repository/docker/leskovmwork/shorturl-service/general
+- https://hub.docker.com/repository/docker/leskovmwork/todo-service/general
+
+
 ## Настройка локального окружения python
 
 #### Cоздание папки для виртуального окружения

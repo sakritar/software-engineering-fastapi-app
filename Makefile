@@ -6,6 +6,16 @@ APP_CONTAINER = app
 EXEC_APP = ${EXEC} ${APP_CONTAINER}
 POETRY_RUN = ${EXEC_APP} poetry run
 
+.PHONY: push-shorturl-service
+push-shorturl-service:
+	docker build -f ./services/shorturl/Dockerfile -t leskovmwork/shorturl-service:latest .
+	docker push leskovmwork/shorturl-service:latest
+
+.PHONY: push-todo-service
+push-todo-service:
+	docker build -f ./services/todo/Dockerfile -t leskovmwork/todo-service:latest .
+	docker push leskovmwork/todo-service:latest
+
 .PHONY: migrate
 migrate:
 	${POETRY_RUN} alembic upgrade head
