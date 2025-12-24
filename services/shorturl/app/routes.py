@@ -1,5 +1,8 @@
+import os
 import secrets
 import string
+
+from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import RedirectResponse
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
@@ -9,6 +12,7 @@ from app import get_db
 from app.models import ShortUrl
 from app.schemas import ShortenRequest, ShortenResponse, ShortUrlStats
 
+load_dotenv()
 router = APIRouter()
 
 ALPHABET = string.ascii_letters + string.digits
@@ -21,6 +25,8 @@ def generate_short_id() -> str:
 
 @router.post('/shorten', response_model=ShortenResponse, status_code=status.HTTP_201_CREATED)
 def shorten_url(request: ShortenRequest, db: Session = Depends(get_db)):
+    port = os.getenv('URL_SERVICE_PORT', 8000)
+
     try:
         max_attempts = 10
         for _ in range(max_attempts):
@@ -42,10 +48,11 @@ def shorten_url(request: ShortenRequest, db: Session = Depends(get_db)):
         db.add(short_url)
         db.commit()
         db.refresh(short_url)
-        
+
         return ShortenResponse(
             short_id=short_id,
-            short_url=request.url
+            short_url=f'http://127.0.0.1:{port}/{short_id}',
+            full_url=request.url,
         )
     except IntegrityError:
         db.rollback()

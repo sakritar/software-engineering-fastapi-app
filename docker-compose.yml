@@ -8,6 +8,7 @@ services:
       - "${TODO_SERVICE_PORT}:8000"
     volumes:
       - todo-data:/app/data
+      - ./.env:/app/.env
     environment:
       - DATABASE_URL=sqlite:////app/data/todo.db
     networks:
@@ -22,6 +23,7 @@ services:
       - "${URL_SERVICE_PORT}:8001"
     volumes:
       - shorturl-data:/app/data
+      - ./.env:/app/.env
     environment:
       - DATABASE_URL=sqlite:////app/data/shorturl.db
     networks:
