@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class ShortenRequest(BaseModel):
-    url: HttpUrl = Field(..., description="Full URL to shorten")
+    url: str = Field(..., description="Full URL to shorten")
 
 
 class ShortenResponse(BaseModel):
@@ -17,4 +17,3 @@ class ShortUrlStats(BaseModel):
     short_id: str
     full_url: str
     created_at: datetime
-
